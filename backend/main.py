@@ -169,7 +169,7 @@ def chat(body: ChatRequest):
         import importlib.util
         from pathlib import Path
 
-        _ai_path = Path(__file__).parent.parent / "ai-layer" / "main.py"
+        _ai_path = Path(__file__).parent / "ai_layer.py"
         _spec = importlib.util.spec_from_file_location("ai_layer", _ai_path)
         if _spec is None or _spec.loader is None:
             raise RuntimeError("AI module could not be loaded")
@@ -178,12 +178,16 @@ def chat(body: ChatRequest):
         _spec.loader.exec_module(ai_layer)
         reply = ai_layer.ask_ai(message, user_id)
     except Exception as e:
+        if str(e) == "GOOGLE_API_KEY is not configured":
+            detail = "Set GOOGLE_API_KEY in the backend Vercel project's environment variables."
+        elif isinstance(e, FileNotFoundError):
+            detail = "backend/ai_layer.py is missing from the backend deployment."
+        else:
+            detail = "AI service failed. Check the backend Vercel function logs."
+
         raise HTTPException(
             status_code=502,
-            detail=(
-                "AI service failed to start or generate a roadmap. Verify that "
-                "ai-layer/main.py is deployed and GOOGLE_API_KEY is configured."
-            ),
-        )
+            detail=detail,
+        ) from e
 
     return ChatResponse(reply=reply)

@@ -3,12 +3,15 @@ from dotenv import load_dotenv
 from pathlib import Path
 import os
 
-# load THIS folder's .env , not the caller's folder
-# the backend imports this file , so plain load_dotenv() would miss the key
-load_dotenv(Path(__file__).parent / ".env")
+# Keep the local secret file outside the deployable backend directory.
+load_dotenv(Path(__file__).parent.parent / "ai-layer" / ".env")
 
 
-client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+api_key = os.getenv("GOOGLE_API_KEY")
+if not api_key:
+    raise RuntimeError("GOOGLE_API_KEY is not configured")
+
+client = genai.Client(api_key=api_key)
 
 # response = client.interactions.create(
 #     model="gemini-3.8-flash",
