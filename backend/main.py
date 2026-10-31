@@ -165,21 +165,25 @@ def chat(body: ChatRequest):
             detail="Only registered users can chat"
         )
 
-    # Import AI layer dynamically (same as original)
-    import importlib.util
-    from pathlib import Path
-
-    _ai_path = Path(__file__).parent.parent / "ai-layer" / "main.py"
-    _spec = importlib.util.spec_from_file_location("ai_layer", _ai_path)
-    ai_layer = importlib.util.module_from_spec(_spec)
-    _spec.loader.exec_module(ai_layer)
-
     try:
+        import importlib.util
+        from pathlib import Path
+
+        _ai_path = Path(__file__).parent.parent / "ai-layer" / "main.py"
+        _spec = importlib.util.spec_from_file_location("ai_layer", _ai_path)
+        if _spec is None or _spec.loader is None:
+            raise RuntimeError("AI module could not be loaded")
+
+        ai_layer = importlib.util.module_from_spec(_spec)
+        _spec.loader.exec_module(ai_layer)
         reply = ai_layer.ask_ai(message, user_id)
     except Exception as e:
         raise HTTPException(
             status_code=502,
-            detail=f"AI layer failed: {e}"
+            detail=(
+                "AI service failed to start or generate a roadmap. Verify that "
+                "ai-layer/main.py is deployed and GOOGLE_API_KEY is configured."
+            ),
         )
 
     return ChatResponse(reply=reply)
