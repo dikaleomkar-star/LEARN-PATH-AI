@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LearnPath AI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="top">
+      <p class="brand">LearnPath <span>AI</span></p>
+      <button id="logout" class="text-button" type="button" hidden>
+        Log out
+      </button>
+    </header>
+
+    <main>
+
+      <!-- Authentication Section -->
+      <section id="auth" class="panel">
+
+        <h1>A path for any topic.</h1>
+
+        <p class="lede">
+          Sign in, name what you want to learn, and LearnPath AI will lay out the order to study it.
+        </p>
+
+        <div class="modes" role="tablist">
+          <button
+            id="show-login"
+            class="mode is-on"
+            type="button"
+            role="tab"
+            aria-selected="true">
+            Log in
+          </button>
+
+          <button
+            id="show-signup"
+            class="mode"
+            type="button"
+            role="tab"
+            aria-selected="false">
+            Create account
+          </button>
+        </div>
+
+        <form id="auth-form">
+
+          <div id="name-field" hidden>
+            <label for="name">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autocomplete="name">
+          </div>
+
+          <label for="email">
+            Email
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required>
+          </label>
+
+          <label for="password">
+            Password
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required>
+          </label>
+
+          <p id="auth-error" class="error" role="alert"></p>
+
+          <button id="auth-submit" class="primary" type="submit">
+            Log in
+          </button>
+
+        </form>
+      </section>
+
+
+      <!-- Learning Studio -->
+      <section id="studio" class="panel" hidden>
+
+        <p id="hello" class="hello"></p>
+
+        <h1>What do you want to learn?</h1>
+
+        <p class="lede">
+          Enter a topic. You get a path: what to learn first,
+          what comes next, and why each step is there.
+        </p>
+
+        <form id="ask-form">
+
+          <label class="topic-label" for="topic">
+            Topic
+            <input
+              id="topic"
+              name="topic"
+              placeholder="React, Kubernetes, operating systems…"
+              required>
+          </label>
+
+          <div class="chips">
+            <button type="button" data-topic="React">React</button>
+            <button type="button" data-topic="Kubernetes">Kubernetes</button>
+            <button type="button" data-topic="Machine learning">
+              Machine learning
+            </button>
+          </div>
+
+          <button id="ask-submit" class="primary" type="submit">
+            Map the path
+          </button>
+
+        </form>
+
+        <p id="status" class="status" aria-live="polite"></p>
+
+        <article id="path" class="path" hidden></article>
+
+        <!-- Download Controls -->
+        <div id="download-controls" class="download-controls" hidden>
+
+          <button id="download-txt" class="download-btn" type="button">
+            Download TXT
+          </button>
+
+          <button id="download-md" class="download-btn" type="button">
+            Download Markdown
+          </button>
+
+          <button id="download-pdf" class="download-btn" type="button">
+            Download PDF
+          </button>
+
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

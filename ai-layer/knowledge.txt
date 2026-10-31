@@ -1,0 +1,74 @@
+LLM
+Large language Model
+AI -> aritificial intelligence 
+human intelligence -> to want computers to mimic human intelligence
+humans able to understand with simple learning/ recognization
+traditional programming
+vote kar sakta h a nhi 
+if age > 18
+if we want that computer to understand a cat or dog 
+
+tradionation programming
+
+train the computer
+machine learning
+
+NN
+DL
+
+Model
+
+LLM
+
+Model -> will behave a human 
+
+-> Generative AI
+generate a speech on AI
+generate 
+
+
+
+LLM -> large language model 
+Generate
+
+LLM
+AI 
+
+development 
+
+Engineering 
+
+
+
+prompt eng 
+
+GIGO (Garbage In Garbage Out)
+
+Input ()
+
+LLM model
+
+Output
+
+LLM -> free to understand 
+Cost Input they cost the
+
+Gemini 
+groq
+free
+
+
+
+libraries
+version 1 -> project 1 
+version 1 -> project 2 
+
+computer -> global 
+only limited to project folder 
+
+that you link libraries with project 
+
+venv -> virtaul env 
+
+
+topic -> roadmap
