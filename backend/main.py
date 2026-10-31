@@ -29,6 +29,7 @@ app.add_middleware(
         "http://127.0.0.1:4173",
         "http://localhost:4173",
     ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -73,6 +74,11 @@ def setup_demo_data():
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Simple password verification for mock database"""
     return plain_password == hashed_password
+
+
+@app.get("/")
+def health_check():
+    return {"status": "ok", "service": "LearnPath AI API", "docs": "/docs"}
 
 
 @app.post("/signup", response_model=UserResponse)

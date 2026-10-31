@@ -3,7 +3,9 @@
 // LearnPath AI - Frontend Application
 // ==========================================
 
-const API = "http://127.0.0.1:8001";
+const API = ["localhost", "127.0.0.1"].includes(window.location.hostname)
+  ? "http://127.0.0.1:8001"
+  : "https://learn-path-ai-backend.vercel.app";
 const USER_KEY = "learnpath_user";
 
 // ==========================================
